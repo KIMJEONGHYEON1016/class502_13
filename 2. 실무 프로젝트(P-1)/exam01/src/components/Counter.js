@@ -1,17 +1,29 @@
-import { useState } from "react";
+import { useState, useRef } from 'react';
 
 const Counter = () => {
-    const [number, setNumber] = useState(0);
-    console.log(number);
+  let num = useRef(10);
 
-    const plus = () => setNumber(number + 1);
-    const minus = () => setNumber(number - 1);
-    return (
-        <>
-            <h1>{number}</h1>
-            <button type="button" onClick={plus}>+1</button>
-            <button type="button" onClick={minus}>-1</button>
-        </>
-    );
+  console.log('렌더링!', 'num', num);
+
+  const [number, setNumber] = useState(0);
+
+  const plus = () => {
+    num.current++; // 11
+    setNumber(number + 1);
+  };
+  const minus = () => setNumber(number - 1);
+
+  return (
+    <>
+      <h1>{number}</h1>
+      <button type="button" onClick={plus}>
+        +1
+      </button>
+      <button type="button" onClick={minus}>
+        -1
+      </button>
+    </>
+  );
 };
+
 export default Counter;
