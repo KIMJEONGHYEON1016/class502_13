@@ -12,7 +12,7 @@ const Counter = () => {
     setNumber(number + 1);
   };
   const minus = () => setNumber(number - 1);
-
+  
   return (
     <>
       <h1>{number}</h1>
