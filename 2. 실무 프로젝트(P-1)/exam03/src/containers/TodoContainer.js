@@ -9,7 +9,7 @@ const intialValue = [
 ];
 
 const TodoContainer = () => {
-  //업데이트 시, 매번 호출
+  // 업데이트 시, 매번 호출
   const [items, setItems] = useState(intialValue);
   const [todo, setTodo] = useState('');
   const [message, setMessage] = useState('');
@@ -43,27 +43,33 @@ const TodoContainer = () => {
   );
 
   // 할일 입력시 todo 상태값 변경
-  const onChange = useCallback((e) => setTodo(e.currentTarget.value));
+  const onChange = useCallback((e) => setTodo(e.currentTarget.value), []);
 
   // 할일 목록 완료 여부 토글(true -> false, false -> true)
   const onToggle = useCallback((id) => {
-    // const newItems = items.map((item) =>
-    //   item.id === id ? { ...item, done: !item.done } : item,
-    // );
-    // setItems(newItems);
-    
-    setItems((prevItems) => {
-      return prevItems.map((item) =>
+    /*
+      const newItems = items.map((item) =>
         item.id === id ? { ...item, done: !item.done } : item,
       );
-    });
+      setItems(newItems);
+      */
+    setItems((prevItems) =>
+      prevItems.map((item) =>
+        item.id === id ? { ...item, done: !item.done } : item,
+      ),
+    );
   }, []);
 
   // 할일 목록 제거
-  const onRemove = (id) => {
-    const newItems = items.filter((item) => item.id !== id);
-    setItems(newItems);
-  };
+  const onRemove = useCallback((id) => {
+    /*
+      const newItems = items.filter((item) => item.id !== id);
+      setItems(newItems);
+      */
+    setItems((prevItems) => {
+      return prevItems.filter((item) => item.id !== id);
+    });
+  }, []);
 
   return (
     <>
