@@ -65,7 +65,7 @@ const todo = {
       itemsEl.removeChild(liEl);
 
       //localStorage에 저장된 데이터도 삭제
-      const id = liEl.dataset.id;
+      const id = Number(liEl.dataset.id);
       const index = todo.data.findIndex((item) => item.id == id);
       if (index !== -1) {
         todo.data.splice(index, 1);
