@@ -3,7 +3,7 @@ const todo = {
   data: [], // 스케줄 데이터
   init() {
     // 저장 값 조회 -> 스케줄 완성
-    const jsonData = localStorage.getItem("todos");
+    const jsonData = localStorage.getItem("todos");    
     const todos = jsonData ? JSON.parse(jsonData) : [];
     this.data = todos;
     this.id = todos.length + 1;
@@ -30,7 +30,7 @@ const todo = {
       return;
     }
 
-    const itemsEl = document.querySelector(".items");
+    const itemsEl = document.querySelector(".items");  //ul 클래스
     const liEl = this.getItem(subject);
     itemsEl.appendChild(liEl);
 

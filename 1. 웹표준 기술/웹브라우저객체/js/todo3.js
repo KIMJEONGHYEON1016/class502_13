@@ -1,4 +1,5 @@
 const todo = {
+  //최종적으로 로컬에서  todo로 데이터를 옮긴후 동기화 시킴
   id: 0,
   data: [], // 스케줄 데이터
   tpl: "", // 스케줄 목록 템플릿 HTML
@@ -6,18 +7,17 @@ const todo = {
 
   init() {
     // 스케줄 목록 템플릿 가져오기
-    const tplEl = document.getElementById("tpl");
-    this.tpl = tplEl.innerHTML;
+    const tplEl = document.getElementById("tpl"); // text html 문서 양식
+    this.tpl = tplEl.innerHTML; // todo에 html과 동기화
     this.parser = new DOMParser();
 
     // 저장 값 조회 -> 스케줄 완성
-    const jsonData = localStorage.getItem("todos");
-    const todos = jsonData ? JSON.parse(jsonData) : [];
-    this.data = todos;
-    this.id = todos.length;
+    const jsonData = localStorage.getItem("todos"); // 로컬 스토리지로부터 조회
+    const todos = jsonData ? JSON.parse(jsonData) : []; //todos == (객체) 문자열 ->  객체
+    this.data = todos; //스케줄 데이터를 담음
+    this.id = todos.length; //로컬 스토리지 배열의 길이 = id로 치환
 
-    const itemsEl = document.querySelector(".items");
-
+    const itemsEl = document.querySelector(".items"); //items를 선택
     for (const item of todos) {
       // Symbol.iterator / 반복자 패턴 / 반복이 필요한 객체
       const liEl = this.getItem(item.title);
