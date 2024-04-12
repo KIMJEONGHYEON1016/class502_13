@@ -1,6 +1,6 @@
 package exam01;
 
-public class EX09 {
+public class Ex09 {
     public static void main(String[] args) {
         long num1 = 100000000000000000L;
         double num2 = num1;
