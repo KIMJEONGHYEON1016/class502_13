@@ -17,7 +17,7 @@ const todo = {
     this.data = todos; //스케줄 데이터를 담음
     this.id = todos.length; //로컬 스토리지 배열의 길이 = id로 치환
 
-    const itemsEl = document.querySelector(".items"); //items를 선택
+    const itemsEl = document.querySelector(".items"); //열을 고름  (li)
     for (const item of todos) {
       // Symbol.iterator / 반복자 패턴 / 반복이 필요한 객체
       const liEl = this.getItem(item.title);
@@ -30,7 +30,7 @@ const todo = {
    *
    */
   add() {
-    const subject = frmRegist.subject.value;
+    const subject = frmRegist.subject.value; //폼의 텍스트  << 이게 서브젝트임
 
     if (!subject.trim()) {
       // 좌우 공백 제거
@@ -38,24 +38,25 @@ const todo = {
       return;
     }
 
-    const itemsEl = document.querySelector(".items");
-    const liEl = this.getItem(subject);
-    itemsEl.appendChild(liEl);
+    const itemsEl = document.querySelector(".items"); //ul태그 고름
+    const liEl = this.getItem(subject); // 폼의 텍스트 고름
+    itemsEl.appendChild(liEl); //ul태그에 폼의 텍스트를 추가 시킴
 
-    frmRegist.subject.value = "";
-    frmRegist.subject.focus();
+    frmRegist.subject.value = ""; //폼 텍스트를 비움
+    frmRegist.subject.focus(); //커서가 가게함
 
-    const { data } = this;
-    let id = this.id;
+    const { data } = this; //todo의 data 가져옴
+    let id = this.id; //id 가져옴
     data.push({
+      //data ( id, title ) 푸쉬함
       id,
       title: subject,
     });
 
-    this.save();
+    this.save(); //로컬에 저장함
   },
   save() {
-    localStorage.setItem("todos", JSON.stringify(this.data));
+    localStorage.setItem("todos", JSON.stringify(this.data)); //JSON으로 변환
   },
   getItem(subject) {
     let html = this.tpl;
