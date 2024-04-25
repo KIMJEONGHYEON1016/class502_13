@@ -6,6 +6,5 @@ public class Ex02 {
         A a = c;
 
 
-
     }
 }

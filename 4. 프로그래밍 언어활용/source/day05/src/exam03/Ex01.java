@@ -10,7 +10,7 @@ public class Ex01 {
         //tiger.move();
 
         Animal bird = new Bird();
-       //bird.move();
+        //bird.move();
 
         Animal[] animals = new Animal[3];
         animals[0] = human;
@@ -20,9 +20,9 @@ public class Ex01 {
 //        for (int i =0; i<animals.length; i ++){
 //            animals[i].move();
 //        }
-
         for (Animal animal : animals) {
             animal.move();
+            System.out.println(animal.num);
         }
     }
 }
