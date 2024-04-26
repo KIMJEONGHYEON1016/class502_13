@@ -1,8 +1,14 @@
-import CounterContainer from "./containers/CounterContainer";
+import Todo from "./components/Todo";
+import CounterContainer2 from "./containers/CounterContainer";
+import TodoContainer from "./containers/TodoContainer";
 
 const App = () => {
-  return <CounterContainer />
+  return (
+    <>
+      <CounterContainer2 />
+      <TodoContainer />
+    </>
+  );
 };
-
 
 export default App;
