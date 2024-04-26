@@ -12,4 +12,3 @@ public class Outer {
         return cal;   //객체의 주소를 반환함
     }
 }
-
