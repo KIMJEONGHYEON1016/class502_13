@@ -1,18 +1,10 @@
-package exam03;
+package exam01;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class CoffeeBean extends AbstractCoffeeShop{
 
-    int a = 10 ;
-
-    @Override
-    public String toString() {
-        return "CoffeeBean{" +
-                "a=" + a +
-                '}';
-    }
 
     private static Map<String, Integer> menus;
 
