@@ -1,0 +1,16 @@
+package exam02;
+
+import java.time.LocalDate;
+import java.time.temporal.ChronoField;
+
+public class Ex02 {
+    public static void main(String[] args) {
+        LocalDate today = LocalDate.now();
+
+        int year = today.getYear();
+        int month = today.getMonthValue();
+        int day = today.getDayOfMonth();
+        int yoil = today.getDayOfWeek().getValue();
+        System.out.printf("year=%d, month=%d, day=%d yoil=%d%n", year, month, day, yoil);
+    }
+}
