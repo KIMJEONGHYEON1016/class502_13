@@ -52,7 +52,9 @@ public class CalenderTest {
                 days.add("  ");
         }
 
-        for (int j = startDate.getDayOfMonth(); < j )
+        for (int j = startDate.getDayOfMonth(); j == endDate.getDayOfMonth(); j++) {
+            days.add(j);
+        }
         return null;
     }
 }
