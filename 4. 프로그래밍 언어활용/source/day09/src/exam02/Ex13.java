@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 
 public class Ex13 {
     public static void main(String[] args) {
-        String str = "이이름: 010-0000-0000\n김이름: 010-1111-1111";
+        String str = "이이름: 010-0000-0000\n김이름: 010-1111-ghdfgdfg1111";
         Pattern p1 = Pattern.compile("([^:]+):\\s*(01[016]\\D*\\d{3,4}\\D*\\d{4})");
         Matcher m1 = p1.matcher(str);
 
