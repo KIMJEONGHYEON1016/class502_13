@@ -1,54 +1,61 @@
+DBeaver
 
-            Java(TM) Cryptography Extension Policy Files
-    for the Java(TM) Platform, Standard Edition Runtime Environment
+24.0.4
 
-                               README
-------------------------------------------------------------------------
+README
 
-Import and export control rules on cryptographic software vary from
-country to country.  The Java Cryptography Extension (JCE) architecture
-allows flexible cryptographic key strength to be configured via the
-jurisdiction policy files which are referenced by the "crypto.policy"
-security property in the <java-home>/conf/security/java.security file.
+Thank you for downloading DBeaver!
 
-By default, Java provides two different sets of cryptographic policy
-files:
+Installing DBeaver
+========================
+  Use automatic installer distribution (Windows and Linux versions)
+  or just unpack archive and start "dbeaver" executable.
+  
+  Note: do not extract archive in the same folder where older version
+  of DBeaver is installed.
+  Remove previous version or extract archive in another folder.
 
-    unlimited:  These policy files contain no restrictions on cryptographic
-                strengths or algorithms
+Command line parameters
+========================
 
-    limited:    These policy files contain more restricted cryptographic
-                strengths
+  -f <sql-file1 [sql-file2..]>
+    Open specified SQL file(s) in SQL editor.
+    This command can be used to associate SQL files with DBeaver in shell.
 
-These files reside in <java-home>/conf/security/policy in the "unlimited"
-or "limited" subdirectories respectively.
+  -nosplash
+    Do not show splash screen
 
-Each subdirectory contains a complete policy configuration,
-and subdirectories can be added/edited/removed to reflect your
-import or export control product requirements.
+  -data <path>
+    Store all projects/configuration in folder <path>. By default DBeaver
+	stores all its data in user's home "DBeaverData" folder.
+	<path> can be an absolute or relative directory name.
+	If you want to use DBeaver as redistributable program start it
+	with arguments like "dbeaver -data workspace".
 
-Within a subdirectory, the effective policy is the combined minimum
-permissions of the grant statements in the file(s) matching the filename
-pattern "default_*.policy".  At least one grant is required.  For example:
+  -nl locale
+    Use specified locale instead of default one.
+    Example: -nl en (use English locale).
 
-    limited   =  Export (all) + Import (limited)  =  Limited
-    unlimited =  Export (all) + Import (all)      =  Unlimited
+  -vm <java vm path>
+    Use Java VM installed in <java vm path> folder instead of default
+    location.
 
-The effective exemption policy is the combined minimum permissions
-of the grant statements in the file(s) matching the filename pattern
-"exempt_*.policy".  Exemption grants are optional.  For example:
+  -vmargs <jvm parameters>
+    Allows to pass any number of additional parameters to JVM.
+    Additional parameters may be used to customize environment or
+    3-rd party jdbc drivers.
 
-    limited   =  grants exemption permissions, by which the
-                 effective policy can be circumvented.
-                 e.g.  KeyRecovery/KeyEscrow/KeyWeakening.
+  -clean
+    Clears all Eclipse caches. Use it if DBeaver fails to start after version upgrade.
 
-Please see the Java Cryptography Architecture (JCA) documentation for
-additional information on these files and formats.
+Licensing
+==========================
+  Apache License 2 (http://www.apache.org/licenses/LICENSE-2.0)
 
-YOU ARE ADVISED TO CONSULT YOUR EXPORT/IMPORT CONTROL COUNSEL OR ATTORNEY
-TO DETERMINE THE EXACT REQUIREMENTS.
+Web
+==========
+  Main web site: https://dbeaver.io
+  Source code: https://github.com/dbeaver/dbeaver
+  Issue tracker: https://github.com/dbeaver/dbeaver/issues
 
-Please note that the JCE for Java SE, including the JCE framework,
-cryptographic policy files, and standard JCE providers provided with
-the Java SE, have been reviewed and approved for export as mass market
-encryption item by the US Bureau of Industry and Security.
+  Please use our issue tracker for technical support, feature suggestions and any other questions
