@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class Book implements Serializable {
     private int isbn;
     private String title;
-    private String author;
+    private transient String author;  //직렬화 배제
 
     public Book(int isbn, String title, String author) {
         this.isbn = isbn;
