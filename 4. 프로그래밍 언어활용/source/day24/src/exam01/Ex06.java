@@ -6,6 +6,7 @@ public class Ex06 {
               Thread th2 = Thread.currentThread();
               int num = 0;
               while(!th2.isInterrupted()) {
+                  System.out.println(th2.isInterrupted());
                   System.out.println(num++);
 
                   for(long j = 0; j < 1000000000L; j++);
