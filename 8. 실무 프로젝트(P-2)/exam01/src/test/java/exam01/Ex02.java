@@ -41,15 +41,15 @@ public class Ex02 {
                 String mobile = rs.getString("MOBILE");
                 LocalDateTime regDt = rs.getTimestamp("REG_DT").toLocalDateTime();
 
-                Member member = new Member();
-                member.setUserNo(userNo);
-                member.setUserId(userId);
-                member.setUserPw(userPw);
-                member.setUserNm(userNm);
-                member.setMobile(mobile);
-                member.setRegDt(regDt);
-
-                members.add(member);
+//                Member member = new Member();
+//                member.setUserNo(userNo);
+//                member.setUserId(userId);
+//                member.setUserPw(userPw);
+//                member.setUserNm(userNm);
+//                member.setMobile(mobile);
+//                member.setRegDt(regDt);
+//
+//                members.add(member);
                 /*
                 System.out.printf("USER_NO:%d, USER_ID:%s, USER_PW:%s, USER_NM:%s, MOBILE:%s, REG_DT:%s%n", userNo, userId, userPw, userNm, mobile, regDt);
 
