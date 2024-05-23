@@ -1,5 +1,7 @@
 package exam01;
 
+import com.zaxxer.hikari.HikariConfig;
+import com.zaxxer.hikari.HikariDataSource;
 import org.apache.tomcat.jdbc.pool.DataSource;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -10,17 +12,22 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class Ex03 {
+
+    /* DB 연결 URL, 계정 */
     private String url = "jdbc:oracle:thin:@localhost:1521:XE";
-    private String user = "STUDY";
-    private String password = "oracle";
-    @BeforeAll // 모든 테스트 메서드 호출 전에 단 한번 실행 - 공통 초기화
+    private String user = "STUDY"; // SCOTT
+    private String password = "oracle"; // tiger
+
+    @BeforeAll
     static void init() {
         try {
+            // 오라클 드라이버 동적 로드
             Class.forName("oracle.jdbc.driver.OracleDriver");
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
     }
+
 
     @Test
     void test1() {
@@ -42,6 +49,7 @@ public class Ex03 {
 
     @Test
     void test2() {
+        // 커넥션 풀 제공
         DataSource ds = new DataSource();
         /* DB 연결 설정 S */
         ds.setDriverClassName("oracle.jdbc.driver.OracleDriver");
@@ -51,8 +59,8 @@ public class Ex03 {
         /* DB 연결 설정 E */
 
         /* 커넥션 풀 설정 S */
-        ds.setInitialSize(2);  // 로드 초기에 생성할 연결 객체 수 - 기본값 10
-        ds.setMaxActive(10);  // 최대 생성할 연결 객체 수 - 기본값 100
+        ds.setInitialSize(2); // 로드 초기에 생성할 연결 객체 수  - 기본값 10
+        ds.setMaxActive(10); // 최대 생성할 연결 객체 수 - 기본값 100
         ds.setTestWhileIdle(true); // 연결 객체가 유휴 상태일때 연결상태 체크
         ds.setTimeBetweenEvictionRunsMillis(5 * 1000); // 5초에 한번씩 연결 상태 체크
         ds.setMinEvictableIdleTimeMillis(30 * 1000); // 유휴 상태 객체를 30초 이후에 소멸 후 새로 생성
@@ -67,4 +75,30 @@ public class Ex03 {
         }
     }
 
+    @Test
+    void test3() {
+        /* 연결 설정 S */
+        HikariConfig config = new HikariConfig();
+        config.setDriverClassName("oracle.jdbc.driver.OracleDriver");
+        config.setJdbcUrl("jdbc:oracle:thin:@localhost:1521:XE");
+        config.setUsername("STUDY");
+        config.setPassword("oracle");
+        /* 연결 설정 E */
+
+        /* 커넥션 풀 설정 S */
+        config.setMaximumPoolSize(10);
+        config.setMinimumIdle(2);
+
+        /* 커넥션 풀 설정 E */
+
+        /* DataSource 객체 생성 */
+        HikariDataSource ds = new HikariDataSource(config);
+
+        /* Connection 객체 생성 */
+        try(Connection conn = ds.getConnection()) {
+            System.out.println(conn);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }
