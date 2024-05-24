@@ -3,18 +3,28 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="mappers.MemberMapper">
-    <select id="getList" resultType="member.Member">
+    <resultMap id="memberMap" type="member.Member">
+        <result column="USER_NO" property="userNo" />
+        <result column="USER_ID" property="userId" />
+        <result column="USER_PW" property="userPw" />
+        <result column="MOBILE" property="mobile" />
+        <result column="USER_NM" property="userNm" />
+        <result column="REG_DT" property="regDt" />
+        <result column="REG_DT" property="modDt" />
+    </resultMap>
+    <select id="getList" resultMap="memberMap">
         SELECT * FROM MEMBER
     </select>
-    <!--
-    <insert id="">
 
+    <insert id="register">
+        INSER INTO MEMBER (USER_NO, USER_ID, USER_PW, USER_NM, MOBILE)
+            VALUES (SEQ_MEMBER.NEXTVAL, #{userId}, #{userPw}, #{userNm}, #{mobile})
     </insert>
+
     <update id="">
 
     </update>
-    <delete id="">
+    <delete>
 
     </delete>
-    -->
 </mapper>

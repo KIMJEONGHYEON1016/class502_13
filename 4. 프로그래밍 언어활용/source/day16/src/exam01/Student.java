@@ -1,9 +1,11 @@
 package exam01;
 
 public class Student {
-    private int ban;
+    public int ban;
     private String name;
     private int score;
+
+    public  Student() {};
     public Student(int ban, String name, int score) {
         this.ban = ban;
         this.name = name;

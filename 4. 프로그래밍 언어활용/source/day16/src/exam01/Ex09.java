@@ -18,6 +18,8 @@ public class Ex09 {
                 new Student(3, "김이름", 20),
                 new Student(3,"박이름", 0)
         };
+        Student student1 = new Student();
+        student1.ban
         Map<Boolean, List<Student>> data = Arrays.stream(students)
                 .collect(Collectors.partitioningBy(s -> s.getScore() >= 90));
 
