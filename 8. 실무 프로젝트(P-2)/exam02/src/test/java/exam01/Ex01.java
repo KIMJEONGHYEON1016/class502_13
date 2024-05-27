@@ -2,9 +2,9 @@ package exam01;
 
 import configs.DBConn;
 import mappers.MemberMapper;
-import member.Member;
 import org.apache.ibatis.session.SqlSession;
 import org.junit.jupiter.api.Test;
+import member.Member;
 
 import java.util.List;
 
@@ -15,7 +15,6 @@ public class Ex01 {
         List<Member> members = session.selectList("mappers.MemberMapper.getList");
         members.forEach(System.out::println);
     }
-
 
     @Test
     void test2() {

@@ -7,7 +7,6 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import java.io.IOException;
 import java.io.Reader;
-import java.util.ResourceBundle;
 
 public class DBConn {
     private static SqlSessionFactory factory;
