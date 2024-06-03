@@ -40,7 +40,7 @@ public class Ex03 {
     @Test
     void test3() {
         MemberMapper mapper = session.getMapper(MemberMapper.class);
-        List<String> userIds = Arrays.asList("USER04", "USER05", "USER06");
+        List<String> userIds = Arrays.asList("USER01");
         List<Member> members = mapper.getList4(userIds);
         members.forEach(System.out::println);
     }

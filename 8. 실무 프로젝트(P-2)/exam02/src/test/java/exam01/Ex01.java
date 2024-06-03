@@ -14,6 +14,8 @@ public class Ex01 {
         SqlSession session = DBConn.getSession();
         List<Member> members = session.selectList("mappers.MemberMapper.getList");
         members.forEach(System.out::println);
+        System.out.println("XXXXXXXXXXXX" + members.get(2).getUserId());
+
     }
 
     @Test
