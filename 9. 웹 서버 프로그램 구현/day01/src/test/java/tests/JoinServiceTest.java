@@ -42,19 +42,83 @@ public class JoinServiceTest {
     }
 
     @Test
-    @DisplayName("필수항목(이메일, 비밀번호, 비밀번호 확인, 회원명) 검증, 검증 실패시 ValidationException 발생")
+    @DisplayName("필수항목(이메일, 비밀번호, 비밀번호 확인, 회원명, 약관동의) 검증, 검증 실패시 ValidationException 발생")
     void requiredFieldTest() {
-        /* 이메일 필수 검증 S */
-        assertThrows(ValidationException.class, () -> {
-            RequestJoin form = getData();
-            // null 체크
-            form.setEmail(null);
-            joinService.process(form);
+       assertAll(
+                // 이메일 검증
+               ()-> {
+                   RequestJoin form = getData();
+                   form.setEmail(null);
+                   requiredFieldEachTest(form, "이메일");
 
-            // 빈 문자
-            form.setEmail("    ");
+                   form.setEmail("     ");
+                   requiredFieldEachTest(form, "이메일");
+               },
+               // 비밀번호 검증
+               () -> {
+                   RequestJoin form = getData();
+                   form.setPassword(null);
+                   requiredFieldEachTest(form, "비밀번호");
+
+                   form.setPassword("       ");
+                   requiredFieldEachTest(form, "비밀번호");
+               },
+               // 비밀번호 확인 검증
+               () -> {
+                    RequestJoin form = getData();
+                    form.setConfirmPassword(null);
+                    requiredFieldEachTest(form, "비밀번호를 확인");
+
+                    form.setConfirmPassword("    ");
+                    requiredFieldEachTest(form, "비밀번호를 확인");
+               },
+               // 회원명 검증
+               () -> {
+                    RequestJoin form = getData();
+                    form.setUserName(null);
+                    requiredFieldEachTest(form, "회원명");
+
+                    form.setUserName("");
+                    requiredFieldEachTest(form, "회원명");
+               },
+               // 약관 동의 검증
+               () -> {
+                   RequestJoin form = getData();
+                   form.setTermsAgree(false);
+                   requiredFieldEachTest(form, "약관에 동의");
+               }
+       );
+
+    }
+
+    void requiredFieldEachTest(RequestJoin form, String keyword) {
+         ValidationException thrown = assertThrows(ValidationException.class, () -> {
             joinService.process(form);
-        });
-        /* 이메일 필수 검증 E */
+        }, keyword + "오류 !");
+
+         String message = thrown.getMessage();
+         assertTrue(message.contains(keyword));
+    }
+
+    @DisplayName("비밀번호와 비밀번호 확인 일치 테스트, 검증 실패시 ValidationException 발생")
+    @Test
+    void passwordMatchTest() {
+
+    }
+
+    @DisplayName("이메일 중복 여부 테스트, 검증 실패시 DuplicatedMemberException 발생")
+    @Test
+    void duplicateEmailTest() {
+
+    }
+    @DisplayName("회원 가입 완료 후 실제 데이터베이스에서 조회 되는지 검증")
+    @Test
+    void MemberExistsTest() {
+        // 가입 처리
+
+        // getData()로 생성한 데이터의 email 항목으로 DB 조회
+
+        // 조회한 회원 데이터 email과 getData()로 생성한 email이 일치하는지 체크
+        // assertEquals(...)
     }
 }
