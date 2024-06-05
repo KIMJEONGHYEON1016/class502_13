@@ -4,7 +4,6 @@ import global.exceptions.ValidationException;
 import member.controllers.RequestJoin;
 import member.services.JoinService;
 import member.validators.JoinValidator;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
