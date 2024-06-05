@@ -7,17 +7,13 @@ import member.validators.JoinValidator;
 
 public class JoinService {
 
-    private Validator<RequestJoin> validator = new JoinValidator();
+    private Validator<RequestJoin> validator;
 
-    public void process(RequestJoin form){
-        String email = form.getEmail();
-        if (email == null || email.isBlank()) {
-            throw new ValidationException("이메일을 입력하세요.");
-        }
+    public JoinService(Validator<RequestJoin> validator) {
+        this.validator = validator;
+    }
 
-        String password = form.getPassword();
-        if (password == null || password.isBlank()) {
-            throw new ValidationException("비밀번호를 입력하세요.");
-        }
+    public void process(RequestJoin form) {
+        validator.check(form);
     }
 }
