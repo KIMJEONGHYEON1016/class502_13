@@ -8,7 +8,7 @@ public class Ex02 {
         nums[2] = 30;
 
         for (int i = 0 ; i <= 3; i++) {
-            System.out.println(nums[i]);
+            System.out.println(nums[i]) ;
         }
 
     }
