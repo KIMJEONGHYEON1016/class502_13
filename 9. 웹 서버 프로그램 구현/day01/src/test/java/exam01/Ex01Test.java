@@ -19,6 +19,7 @@ public class Ex01Test {
         Calculator cal = new Calculator();
         int num1 = 10, num2 = 20;
         int result = cal.add(num1, num2);
+
         assertEquals(30, result);
     }
 
@@ -26,7 +27,9 @@ public class Ex01Test {
     @DisplayName("테스트2")
     void test2() {
         LocalDate expected = LocalDate.now();
+
         LocalDate date = LocalDate.of(2024, 6, 9);
+
 
 
         assertEquals(expected, date); // equals and hashCode
