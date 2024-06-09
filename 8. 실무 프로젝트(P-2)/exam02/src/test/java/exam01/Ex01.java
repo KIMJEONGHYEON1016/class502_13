@@ -1,6 +1,6 @@
 package exam01;
 
-import configs.DBConn;
+import mappers.configs.DBConn;
 import mappers.MemberMapper;
 import org.apache.ibatis.session.SqlSession;
 import org.junit.jupiter.api.Test;

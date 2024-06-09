@@ -1,4 +1,4 @@
-package configs;
+package mappers.configs;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -13,7 +13,7 @@ public class DBConn {
 
     static {
         try {
-            Reader reader = Resources.getResourceAsReader("configs/mybatis-config.xml");
+            Reader reader = Resources.getResourceAsReader("mappers/configs/mybatis-config.xml");
 
             factory = new SqlSessionFactoryBuilder().build(reader);
 

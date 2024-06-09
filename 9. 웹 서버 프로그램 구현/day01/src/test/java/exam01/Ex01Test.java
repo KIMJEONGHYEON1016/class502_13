@@ -27,7 +27,9 @@ public class Ex01Test {
     @DisplayName("테스트2")
     void test2() {
         LocalDate expected = LocalDate.now();
-        LocalDate date = LocalDate.of(2024, 6, 5);
+
+        LocalDate date = LocalDate.of(2024, 6, 9);
+
 
 
         assertEquals(expected, date); // equals and hashCode
