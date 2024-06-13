@@ -7,7 +7,7 @@
     List<String> names = new ArrayList<>();
     names.add("이름1");
     names.add("이름2");
-    out.write(names.toString());
+    out.(names.toString());
 
     LocalDateTime now = LocalDateTime.now();
     out.write("<br>" + now.toString());

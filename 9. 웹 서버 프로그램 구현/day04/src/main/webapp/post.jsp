@@ -3,7 +3,7 @@
 <form method="post" action="post_ps.jsp">
     제목 : <input tpye='text' name = 'subject'><br>
     내용 : <textarea name = "content"></textarea><br>
-    <button type='subimt'>작성하기</button>
+    <button type='submit'>작성하기</button>
 </form>
 
 <%

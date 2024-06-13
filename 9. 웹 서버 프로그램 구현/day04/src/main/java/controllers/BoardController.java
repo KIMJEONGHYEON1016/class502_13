@@ -21,4 +21,5 @@ public class BoardController extends HttpServlet {
         String id = req.getParameter("id");
         System.out.printf("id=%s%n", id);
     }
+
 }
