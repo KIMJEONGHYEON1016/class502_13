@@ -9,8 +9,11 @@
     out.write("<br>name : " + name);
     print();
 %>
+
+<%--
 <br>
 <%=num1%> + <%=num2%> = <%=result%>
+--%>
 
 <%!
     // 클래스명 바로 아래쪽 - 멤버 변수
