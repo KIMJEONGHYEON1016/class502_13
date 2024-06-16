@@ -5,7 +5,7 @@ import jakarta.servlet.*;
 
 import java.io.IOException;
 
-public class CommonFilter implements Filter {
+public class CommonFilter implements Filter{
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
         System.out.println("init()");
