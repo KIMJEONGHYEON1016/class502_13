@@ -1,11 +1,14 @@
 package org.choongang.member.tests;
 
 import com.github.javafaker.Faker;
+import org.choongang.global.configs.DBConn;
 import org.choongang.global.exceptions.BadRequestException;
 import org.choongang.member.controllers.RequestJoin;
+import org.choongang.member.entities.Member;
+import org.choongang.member.exceptions.DuplicatedMemberException;
+import org.choongang.member.mapper.MemberMapper;
 import org.choongang.member.services.JoinService;
 import org.choongang.member.services.MemberServiceProvider;
-import org.choongang.member.validators.JoinValidator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -13,7 +16,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Locale;
-import java.util.zip.DataFormatException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -22,10 +24,12 @@ import static org.junit.jupiter.api.Assertions.*;
 public class JoinServiceTest {
 
     private JoinService service;
+    private MemberMapper mapper;
 
     @BeforeEach
     void init() {
         service = MemberServiceProvider.getInstance().joinService();
+        mapper = DBConn.getSession().getMapper(MemberMapper.class);
     }
 
     RequestJoin getData() {
@@ -45,9 +49,14 @@ public class JoinServiceTest {
     @Test
     @DisplayName("회원가입 성공시 예외가 발생하지 않음")
     void successTest() {
+        RequestJoin form = getData();
         assertDoesNotThrow(() -> {
-            service.process(getData());
+            service.process(form);
         });
+
+        // 가입된 이메일로 회원이 조회 되는지 체크
+        Member member = mapper.get(form.getEmail());
+        assertEquals(form.getEmail(), member.getEmail());
     }
 
     @Test
@@ -91,12 +100,13 @@ public class JoinServiceTest {
 
     @Test
     @DisplayName("비밀번호와 확인이 일치하지 않으면 BadRequestException 발생")
-    void passwordMismatchText() {
+    void passwordMismatchTest() {
         BadRequestException thrown = assertThrows(BadRequestException.class, () -> {
             RequestJoin form = getData();
             form.setConfirmPassword(form.getPassword() + "**");
             service.process(form);
         });
+
         String message = thrown.getMessage();
         assertTrue(message.contains("비밀번호가 일치하지"));
     }
@@ -106,15 +116,16 @@ public class JoinServiceTest {
     void emailPatternTest() {
         BadRequestException thrown = assertThrows(BadRequestException.class, () -> {
             RequestJoin form = getData();
-            form.setEmail("*****");
+            form.setEmail("******");
             service.process(form);
         });
+
         String message = thrown.getMessage();
         assertTrue(message.contains("이메일 형식이"));
     }
 
     @Test
-    @DisplayName("비밀번호 자리수가 8자리 미만 BadRequestException 발생")
+    @DisplayName("비밀번호 자리수가 8자리 미만이면 BadRequestException 발생")
     void passwordLengthTest() {
         BadRequestException thrown = assertThrows(BadRequestException.class, () -> {
             Faker faker = new Faker();
@@ -123,17 +134,20 @@ public class JoinServiceTest {
             form.setConfirmPassword(form.getPassword());
             service.process(form);
         });
+
         String message = thrown.getMessage();
+
         assertTrue(message.contains("8자리 이상"));
     }
 
     @Test
     @DisplayName("이미 가입된 메일인 경우 DuplicatedMemberException 발생")
     void duplicateEmailTest() {
-        assertThrows(DataFormatException.class, () -> {
-           RequestJoin form = getData();
-           service.process(form);
-           service.process(form);
+        MemberServiceProvider provider = MemberServiceProvider.getInstance();
+        assertThrows(DuplicatedMemberException.class, () -> {
+            RequestJoin form = getData();
+            provider.joinService().process(form);
+            provider.joinService().process(form);
         });
     }
 }

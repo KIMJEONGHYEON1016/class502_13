@@ -8,8 +8,8 @@
         <result column="EMAIL" property="email" />
         <result column="PASSWORD" property="password" />
         <result column="USER_NAME" property="userName" />
-        <result column="REG_DT" property="redDt" />
-        <result column="MOD_DT" property="modDT" />
+        <result column="REG_DT" property="regDt" />
+        <result column="MOD_DT" property="modDt" />
     </resultMap>
 
     <select id="exist" resultType="long">
@@ -22,6 +22,6 @@
 
     <insert id="register">
         INSERT INTO MEMBER (USER_NO, EMAIL, PASSWORD, USER_NAME)
-            VALUES (SEQ_MEMBER.NEXTVAL, #{email}, #{password}, #{userName}
+        VALUES (SEQ_MEMBER.NEXTVAL, #{email}, #{password}, #{userName})
     </insert>
 </mapper>
