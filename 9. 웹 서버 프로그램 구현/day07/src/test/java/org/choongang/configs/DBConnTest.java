@@ -1,4 +1,4 @@
-package choongang.configs;
+package org.choongang.configs;
 
 import org.apache.ibatis.session.SqlSession;
 import org.choongang.global.configs.DBConn;
