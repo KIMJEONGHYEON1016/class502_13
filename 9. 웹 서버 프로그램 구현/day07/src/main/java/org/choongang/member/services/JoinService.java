@@ -1,5 +1,6 @@
 package org.choongang.member.services;
 
+import jakarta.servlet.http.HttpServletRequest;
 import org.choongang.global.exceptions.BadRequestException;
 import org.choongang.global.validators.Validator;
 import org.choongang.member.controllers.RequestJoin;
@@ -36,5 +37,13 @@ public class JoinService {
             throw new BadRequestException("회원가입에 실패하였습니다.");
         }
 
+    }
+
+    public void process(HttpServletRequest request) {
+        RequestJoin form = RequestJoin.builder()
+                .email(request.getParameter("email"))
+                .password(request.getParameter("password"))
+                .confirmPassword(request.getParameter("confirmPassword"))
+                .
     }
 }

@@ -19,17 +19,20 @@ public class MemberServiceProvider {
         return instance;
     }
 
+    public SqlSession getSession() {    //변경된 세션 가져오기
+        return DBConn.getSession();
+    }
+
     public JoinValidator joinValidator() {
         return new JoinValidator(memberMapper());
     }
 
     public LoginValidator loginValidator() {
-        return new LoginValidator();
+        return new LoginValidator(memberMapper());
     }
 
     public MemberMapper memberMapper() {
-        SqlSession session = DBConn.getSession();
-        return session.getMapper(MemberMapper.class);
+        return getSession().getMapper(MemberMapper.class);
     }
 
 
@@ -38,6 +41,6 @@ public class MemberServiceProvider {
     }
 
     public LoginService loginService() {
-        return new LoginService(loginValidator());
+        return new LoginService(loginValidator(), memberMapper());
     }
 }

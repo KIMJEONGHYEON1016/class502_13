@@ -6,13 +6,15 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.choongang.member.services.JoinService;
+import org.choongang.member.services.MemberServiceProvider;
 
 import java.io.IOException;
 
 @WebServlet("/member/Join")
 public class JoinController extends HttpServlet {
     @Override
-    public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    public void doGet(HttpServletRequest req, HttpServletResponse resp) throws      ServletException, IOException {
         RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/templates/member/join.jsp");
         rd.forward(req, resp);
     }
@@ -20,5 +22,7 @@ public class JoinController extends HttpServlet {
     @Override
     public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+        JoinService service = MemberServiceProvider.getInstance().joinService();
+        service.process(req);
     }
 }
