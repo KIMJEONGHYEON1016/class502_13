@@ -2,7 +2,8 @@ package org.choongang.global.exceptions;
 
 import jakarta.servlet.http.HttpServletResponse;
 
-public class CommonException extends RuntimeException{
+public class CommonException extends RuntimeException {
+
     private int status; // 응답 코드
 
     public CommonException(String message) {
