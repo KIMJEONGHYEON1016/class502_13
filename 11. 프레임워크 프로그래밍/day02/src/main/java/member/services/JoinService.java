@@ -1,6 +1,7 @@
 package member.services;
 
 
+import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import member.controllers.RequestJoin;
 import member.dao.MemberDao;
@@ -14,8 +15,10 @@ import java.time.LocalDateTime;
 @Service
 public class JoinService {
 
+
     private final JoinValidator validator;
 
+    @NonNull
     private MemberDao memberDao;
 
     // 의존 관계 - 없으면 객체 생성 X

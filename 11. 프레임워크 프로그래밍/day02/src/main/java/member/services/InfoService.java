@@ -14,6 +14,7 @@ import java.util.Optional;
 
 @Service
 public class InfoService {
+
     private MemberDao memberDao;
 
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yy.MM.dd");
@@ -31,7 +32,6 @@ public class InfoService {
     }
     */
 
-    @Autowired
     public void setFormatter(@Nullable DateTimeFormatter formatter) {
         this.formatter = formatter;
     }
