@@ -18,7 +18,7 @@ public class ProxyCache {
     @Pointcut("execution(* exam01..*(..))")
     public void publicTarget() {}
 
-    @Around("config.CommonPointcut.publicTarget()")
+    @Around("CommonPointcut.publicTarget()")
     public Object process(ProceedingJoinPoint joinPoint) throws Throwable {
 
         Object[] args = joinPoint.getArgs();
