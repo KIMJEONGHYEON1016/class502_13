@@ -37,7 +37,15 @@ ${commonValue}
         </dd>
     </dl>
     <dl>
-        <dt>약관동의</dt>
+        <dt>주소</dt>
+        <dd>
+            <form:input path="addr.zipCode" placeholder="우편번호" />
+            <form:input path="addr.address" placeholder="주소" />
+            <form:input path="addr.addressSub" placeholder="나머지 주소" />
+        </dd>
+    </dl>
+    <dl>
+        <dt>약관 동의</dt>
         <dd>
             <form:checkbox path="agree" value="true" label="회원가입 약관에 동의합니다." />
         </dd>
