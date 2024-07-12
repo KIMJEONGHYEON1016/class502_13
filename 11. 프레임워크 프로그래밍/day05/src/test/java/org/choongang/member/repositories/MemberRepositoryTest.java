@@ -88,4 +88,9 @@ public class MemberRepositoryTest {
 
         System.out.printf("총 갯수 : %d, 총 페이지 수 : %d%n", total, pages);
     }
+
+    @Test
+    void test9() {
+        System.out.println(repository.getClass());
+    }
 }
