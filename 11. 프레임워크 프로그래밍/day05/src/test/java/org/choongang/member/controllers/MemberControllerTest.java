@@ -4,6 +4,7 @@ import org.choongang.config.MvcConfig;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.web.SpringJUnitWebConfig;
 import org.springframework.test.web.servlet.MockMvc;
@@ -29,7 +30,10 @@ public class MemberControllerTest {
 
     @Test
     void test1() throws Exception {
-        mockMvc.perform(post("/member/join").header("appkey", "1234"))
+        mockMvc.perform(post("/member/join")
+                        .header("appkey", "1234")
+                        .contentType(MediaType.APPLICATION_JSON_VALUE)
+                 )
                 .andDo(print());
     }
 }
