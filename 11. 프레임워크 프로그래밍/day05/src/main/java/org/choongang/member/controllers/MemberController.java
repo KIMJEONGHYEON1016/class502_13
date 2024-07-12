@@ -2,26 +2,32 @@ package org.choongang.member.controllers;
 
 
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.Mapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.awt.*;
+import java.util.List;
+
 
 @Controller
 @RequestMapping("/member")
 @Slf4j
 public class MemberController {
 
-//    private final Logger log = LoggerFactory.getLogger(MemberController.class);
+    @ModelAttribute("commonValue")
+    public String commonValue() {
+        return "공통 속성 값...";
+    }
+
+    @ModelAttribute("hobbies")
+    public List<String> hobbies() {
+        return List.of("취미1", "취미2", "취미3", "취미4");
+    }
 
     @GetMapping("/join")
-    public String join() {
+    public String join(@ModelAttribute RequestJoin form) {
 
         return "member/join";
     }
@@ -33,22 +39,33 @@ public class MemberController {
     }
 
     @GetMapping("/login")
-    public String login() {
+    public String login(RequestLogin2 form) {
+        if (form != null) {
+            log.info("이메일:{}, 비밀번호: {}", form.email(), form.password());
+        }
         return "/member/login";
     }
 
 
 
      /*
+     @GetMapping("/join")
+    public String join(Model model) {
+
+        RequestJoin form = new RequestJoin();
+
+        model.addAttribute("requestJoin", form);    // 비어 있음
+
+        return "member/join";
+    }
     @PostMapping("/join")
     public String joinPs(RequestJoin form) {
 
         return "redirect:/member/login";
         return "forward:/member/login";
     }
-    */
 
-    /*
+
     @GetMapping("/join")
     public String join1() {
         log.info("{}, {} 없음", "mode1", "mode2");
