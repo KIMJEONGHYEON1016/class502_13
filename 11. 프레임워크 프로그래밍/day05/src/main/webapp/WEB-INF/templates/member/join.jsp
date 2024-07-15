@@ -54,6 +54,7 @@
         </dd>
     </dl>
     <button type="submit">
+
         <spring:message code="가입하기" />
     </button>
 </form:form>
