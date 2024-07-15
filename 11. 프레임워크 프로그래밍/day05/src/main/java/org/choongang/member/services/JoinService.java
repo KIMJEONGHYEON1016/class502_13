@@ -1,4 +1,4 @@
-package org.choongang.member.entities.services;
+package org.choongang.member.services;
 
 
 import lombok.RequiredArgsConstructor;
