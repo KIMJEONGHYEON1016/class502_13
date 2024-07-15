@@ -37,27 +37,35 @@ public class JoinValidator implements Validator {
         boolean agree = form.isAgree();
 
         // 1. 필수 항목 검증
+        /*
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "email", "Required");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "Required");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "confirmPassword", "Required");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "userName", "Required");
+        */
 
+        /*
         if (!agree) {
             errors.rejectValue("agree", "Required", "회원 가입 약관에 동의하세요.");
         }
+        */
+
 
         // 2. 이메일 중복 여부 (회원이 가입되어 있는지 체크)
         if (StringUtils.hasText(email) && mapper.exists(email) != 0L) {
             errors.rejectValue("email", "Duplicated");
         }
 
+
+        /*
         // 3. 비밀번호 자리수 체크(8자리)
         if (StringUtils.hasText(password) && password.length() < 8) {
             errors.rejectValue("password", "Length");
         }
+        */
 
         // 4. 비밀번호, 비밀번호 확인 일치 여부
-        if (StringUtils.hasText(confirmPassword) && confirmPassword == password) {
+        if (StringUtils.hasText(confirmPassword) && !password.equals(confirmPassword)) {
             errors.rejectValue("confirmPassword", "Mismatch");
         }
     }

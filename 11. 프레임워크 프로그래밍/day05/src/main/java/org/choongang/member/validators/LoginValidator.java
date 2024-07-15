@@ -1,15 +1,53 @@
 package org.choongang.member.validators;
 
 
-import org.choongang.global.validators.Validator;
+import lombok.RequiredArgsConstructor;
+import org.choongang.member.controllers.RequestJoin;
 import org.choongang.member.controllers.RequestLogin;
+import org.choongang.member.entities.Member;
+import org.choongang.member.mappers.MemberMapper;
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
+import org.springframework.validation.Errors;
+import org.springframework.validation.Validator;
 
 @Component
-public class LoginValidator implements Validator<RequestLogin> {
+@RequiredArgsConstructor
+public class LoginValidator implements Validator {
+
+    private final MemberMapper mapper;
 
     @Override
-    public void check(RequestLogin form) {
+    public boolean supports(Class<?> clazz) {
+        return clazz.isAssignableFrom(RequestLogin.class);
+    }
 
+    @Override
+    public void validate(Object target, Errors errors) {
+
+        if (errors.hasErrors()) {
+            return;
+        }
+
+        RequestLogin form = (RequestLogin) target;
+        String email = form.getEmail();
+        String password = form.getPassword();
+
+        boolean saveEmail = form.isSaveEmail();
+
+        if (StringUtils.hasText(email)) {
+            Member member = mapper.get(email);
+            if (member == null) {
+//                errors.rejectValue("email", "Check.emailPassword");
+                errors.reject("Check.emailPassword");
+            }
+
+            if(member != null && !StringUtils.hasText(password) && !BCrypt.checkpw(password, member.getPassword())) {
+//                errors.rejectValue("password", "Check.emailPassword");
+                errors.reject("Check.emailPassword");
+            }
+
+        }
     }
 }
