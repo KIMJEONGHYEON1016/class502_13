@@ -23,6 +23,11 @@
                 org.choongang.config.MvcConfig
             </param-value>
         </init-param>
+        <multipart-config>
+            <max-file-size>20971520</max-file-size>
+            <max-request-size>62914560</max-request-size>
+            <file-size-threshold>20971520</file-size-threshold>
+        </multipart-config>
     </servlet>
     <servlet-mapping>
         <servlet-name>dispatcher</servlet-name>
