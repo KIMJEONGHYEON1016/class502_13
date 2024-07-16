@@ -4,6 +4,7 @@ import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.choongang.global.exceptions.BadRequestException;
 import org.choongang.member.services.JoinService;
 import org.choongang.member.services.LoginService;
 import org.choongang.member.validators.JoinValidator;
@@ -87,6 +88,27 @@ public class MemberController {
 
         return "redirect:/member/login";
     }
+
+    @GetMapping("/list")
+    public String list(@Valid @ModelAttribute MemberSearch search, Errors errors) {
+
+        log.info(search.toString());
+
+        boolean result = false;
+        if (!result) {
+            throw new BadRequestException("예외 발생!!!");
+        }
+
+        return "member/list";
+    }
+
+    @ResponseBody
+    @GetMapping("/info/{id}/{id2}")
+    public void info(@PathVariable("id") String email, @PathVariable("id2") String email2) {
+
+        log.info("email:{}, email2:{}", email, email2);
+    }
+
 
     /*
     @InitBinder
