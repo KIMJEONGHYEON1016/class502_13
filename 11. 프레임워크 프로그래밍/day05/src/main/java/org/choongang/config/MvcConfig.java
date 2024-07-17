@@ -8,15 +8,16 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.config.annotation.*;
 
 @Configuration
 @EnableWebMvc
 @ComponentScan("org.choongang")
 @Import({DBConfig.class, MessageConfig.class, InterceptorConfig.class, FileConfig.class})
-@RequiredArgsConstructor
+//@RequiredArgsConstructor
 public class MvcConfig implements WebMvcConfigurer {
-    private final JoinValidator joinValidator;
+//    private final JoinValidator joinValidator;
 
       // 모든 컨트롤러에 적용될 수 있는 전역 Validator 적용
 //    @Override
@@ -47,9 +48,15 @@ public class MvcConfig implements WebMvcConfigurer {
 
     @Bean
     public static PropertySourcesPlaceholderConfigurer propertyConfigurer() {
+        String fileName = "application";
+        String profile = System.getenv("spring.profiles.active");
+        fileName += StringUtils.hasText(profile) ? "-" + profile: "";
+
         PropertySourcesPlaceholderConfigurer conf = new PropertySourcesPlaceholderConfigurer();
-        conf.setLocations(new ClassPathResource("application.properties"));
+        conf.setLocations(new ClassPathResource(fileName + ".properties"));
 
         return conf;
     }
+
+
 }
