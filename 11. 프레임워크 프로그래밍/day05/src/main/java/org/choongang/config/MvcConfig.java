@@ -2,16 +2,18 @@ package org.choongang.config;
 
 import lombok.RequiredArgsConstructor;
 import org.choongang.member.validators.JoinValidator;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
-import org.springframework.validation.Validator;
+import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.web.servlet.config.annotation.*;
 
 @Configuration
 @EnableWebMvc
 @ComponentScan("org.choongang")
-@Import({DBConfig.class, MessageConfig.class, InterceptorConfig.class})
+@Import({DBConfig.class, MessageConfig.class, InterceptorConfig.class, FileConfig.class})
 @RequiredArgsConstructor
 public class MvcConfig implements WebMvcConfigurer {
     private final JoinValidator joinValidator;
@@ -43,6 +45,11 @@ public class MvcConfig implements WebMvcConfigurer {
         registry.jsp("/WEB-INF/templates/", ".jsp");
     }
 
+    @Bean
+    public static PropertySourcesPlaceholderConfigurer propertyConfigurer() {
+        PropertySourcesPlaceholderConfigurer conf = new PropertySourcesPlaceholderConfigurer();
+        conf.setLocations(new ClassPathResource("application.properties"));
 
-
+        return conf;
+    }
 }
