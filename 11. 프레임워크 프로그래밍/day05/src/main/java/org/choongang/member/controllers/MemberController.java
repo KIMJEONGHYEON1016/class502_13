@@ -121,14 +121,24 @@ public class MemberController {
     @GetMapping("/list")
     public String list2(Model model) {
 
-        Member member = Member.builder()
-                .email("user01@test.org")
-                .password("12345678")
-                .userName("사용자01")
-                .regDt(LocalDateTime.now())
-                .build();
+//        Member member = Member.builder()
+//                .email("user01@test.org")
+//                .password("12345678")
+//                .userName("<h1>사용자01</h1>")
+//                .regDt(LocalDateTime.now())
+//                .build();
+//
+//        model.addAttribute("member", member);
 
-        model.addAttribute("member", member);
+        List<Member> items = IntStream.rangeClosed(1, 10)
+                .mapToObj(i -> Member.builder()
+                        .email("user" + i +"@test.org")
+                        .userName("사용자" + i)
+                        .regDt(LocalDateTime.now())
+                        .build())
+                        .toList();
+
+        model.addAttribute("items", items);
 
         return "member/list";
     }
