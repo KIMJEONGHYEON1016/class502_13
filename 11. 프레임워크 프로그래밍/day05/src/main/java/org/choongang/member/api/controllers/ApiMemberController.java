@@ -31,7 +31,7 @@ public class ApiMemberController {
     private final Utils utils;
 
     @PostMapping // POST /api/member
-    public ResponseEntity join(@Valid @RequestBody RequestJoin form, Errors errors) {
+    public ResponseEntity join(@Valid @RequestBody RequestJoin form, Errors errors) {       //  Content-Type: application/json으로 판단하고 데이터 변환
         if (errors.hasErrors()) {
             throw new BadRequestException(utils.getErrorMessages(errors));
         }

@@ -118,18 +118,34 @@ public class MemberController {
         log.info("email:{}, email2:{}", email, email2);
     }
 
-    @ResponseBody
     @GetMapping("/list")
-    public List<Member> list() {
-        List<Member> members = IntStream.rangeClosed(1, 10)
-                .mapToObj(i -> Member.builder()
-                        .email("user"+ i + "@test.org")
-                        .password("12345678")
-                        .regDt(LocalDateTime.now())
-                        .build())
-                .toList();
-        return members;
+    public String list2(Model model) {
+
+        Member member = Member.builder()
+                .email("user01@test.org")
+                .password("12345678")
+                .userName("사용자01")
+                .regDt(LocalDateTime.now())
+                .build();
+
+        model.addAttribute("member", member);
+
+        return "member/list";
     }
+
+
+//    @ResponseBody
+//    @GetMapping("/list")
+//    public List<Member> list() {
+//        List<Member> members = IntStream.rangeClosed(1, 10)
+//                .mapToObj(i -> Member.builder()
+//                        .email("user"+ i + "@test.org")
+//                        .password("12345678")
+//                        .regDt(LocalDateTime.now())
+//                        .build())
+//                .toList();
+//        return members;
+//    }
      /*
     @ExceptionHandler(Exception.class)
     public String errorHandler(Exception e, HttpServletRequest request, HttpServletResponse response, Model model) {
