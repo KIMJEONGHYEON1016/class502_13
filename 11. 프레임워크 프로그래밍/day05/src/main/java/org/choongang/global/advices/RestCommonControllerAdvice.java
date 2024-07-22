@@ -32,6 +32,6 @@ public class RestCommonControllerAdvice {
 
         e.printStackTrace();
 
-        return ResponseEntity.status(status).body(data);    // 응답 헤더 바디쪽 설정
+        return ResponseEntity.status(status).body(data);
     }
 }

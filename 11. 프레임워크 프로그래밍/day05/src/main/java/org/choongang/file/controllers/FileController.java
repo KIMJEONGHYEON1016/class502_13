@@ -30,6 +30,7 @@ public class FileController {
         log.info("파일명: {}", name);
 
         File uploadPath = new File(uploadDir + name);
+
         try {
             file.transferTo(uploadPath);
         } catch (IOException e) {}

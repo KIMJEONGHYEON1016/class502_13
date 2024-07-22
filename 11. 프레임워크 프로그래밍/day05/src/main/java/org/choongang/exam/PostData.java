@@ -8,5 +8,4 @@ public class PostData {
     private long id;
     private String title;
     private String body;
-
 }

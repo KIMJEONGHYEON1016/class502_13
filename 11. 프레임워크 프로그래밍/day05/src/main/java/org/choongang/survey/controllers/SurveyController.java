@@ -1,7 +1,6 @@
 package org.choongang.survey.controllers;
 
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -39,7 +38,7 @@ public class SurveyController {
         log.info("form : " + form.toString());
         log.info("form2 : " + form2.toString());
 
-        status.setComplete();   // 세션 비우기 - requestSurvey 세션 비우기
+        status.setComplete(); // 세션 비우기 - requestSurvey 세션 비우기
 
         System.out.println("세션 비우기 후: " + request.getSession().getAttribute("requestSurvey"));
 

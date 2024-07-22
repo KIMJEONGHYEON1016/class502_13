@@ -31,8 +31,8 @@
             <spring:message code="비밀번호_확인" />
         </dt>
         <dd>
-            <form:password path="confirmPassword" />
-            <form:errors path="confirmPassword" />
+           <form:password path="confirmPassword" />
+           <form:errors path="confirmPassword" />
         </dd>
     </dl>
     <dl>
@@ -54,7 +54,6 @@
         </dd>
     </dl>
     <button type="submit">
-
-        <spring:message code="가입하기" />
+      <spring:message code="가입하기" />
     </button>
 </form:form>

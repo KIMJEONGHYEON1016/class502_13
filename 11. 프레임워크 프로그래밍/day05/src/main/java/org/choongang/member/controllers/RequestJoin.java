@@ -6,7 +6,6 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
-
 @Data
 public class RequestJoin {
     @NotBlank
@@ -14,7 +13,7 @@ public class RequestJoin {
     private String email;
 
     @NotBlank
-    @Size(min = 8)
+    @Size(min=8)
     private String password;
 
     @NotBlank
@@ -27,19 +26,17 @@ public class RequestJoin {
     private boolean agree;
 }
 
-
-
 /*
 public class RequestJoin {
     private String email;
     private String password;
     private String confirmPassword;
     private String userName;
-    //    private String[] hobby;
-//    private Set<String> hobby;
+    //private String[] hobby;
+    //private Set<String> hobby;
+    //private List<String> hobby;
     private String hobby;
     private boolean agree;
 
     private Address addr;
-}
- */
+} */

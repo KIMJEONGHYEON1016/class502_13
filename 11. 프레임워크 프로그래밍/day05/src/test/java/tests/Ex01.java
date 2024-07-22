@@ -20,11 +20,10 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import java.net.URI;
 import java.util.List;
 
 @SpringJUnitWebConfig
-@ContextConfiguration(classes = MvcConfig.class)
+@ContextConfiguration(classes= MvcConfig.class)
 public class Ex01 {
 
     @Autowired
@@ -32,17 +31,24 @@ public class Ex01 {
 
     @Test
     void test1() {
-        URI url = UriComponentsBuilder.fromUriString("/https://www.naver.com")
-                .path("/news/{0}")
+        UriComponents url = UriComponentsBuilder.fromUriString("https://www.naver.com")
+                //.path("/news/{0}")
                 .queryParam("t1", "v1")
                 .queryParam("t2", "v2")
+                //.queryParam("t3", "%ED%95%9C%EA%B8%80")
                 .queryParam("t3", "한글")
-                .queryParam("t4", "aa{1}")
+                //.queryParam("t4", "aa{1}")
                 .fragment("hash")
-                .encode()
-                .build("AAAA", "BBBB");
-
+                //.encode()
+                        .build(false);
+                //.encode()
+                //.build("AAAA", "BBBB");
+        System.out.println(url.getQuery());
         System.out.println(url);
+
+
+
+
     }
 
     @Test
@@ -61,18 +67,18 @@ public class Ex01 {
         PostData data = om.readValue(body, PostData.class);
         System.out.println(data);
 
+        // 복합 데이터 객체 변환 - List, Set, Map ..
         String itemsBody = restTemplate.getForObject("https://jsonplaceholder.typicode.com/posts", String.class);
-        System.out.println(itemsBody);
 
         List<PostData> items = om.readValue(itemsBody, new TypeReference<>(){});
         items.forEach(System.out::println);
-
     }
 
     @Test
     @DisplayName("JSON 형식으로 POST 처리 예시")
     void test4() throws Exception {
         RestTemplate restTemplate = new RestTemplate();
+
         RequestJoin form = new RequestJoin();
         form.setEmail("user999@test.org");
         form.setPassword("12345678");
@@ -81,6 +87,7 @@ public class Ex01 {
         form.setAgree(true);
 
         String params = om.writeValueAsString(form);
+
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -94,7 +101,7 @@ public class Ex01 {
 
     @Test
     @DisplayName("일반 양식 형식으로 전송 - Content-Type: application/x-www-form-urlencoded")
-    void test5() throws Exception {
+    void test5() {
         RestTemplate restTemplate = new RestTemplate();
 
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();

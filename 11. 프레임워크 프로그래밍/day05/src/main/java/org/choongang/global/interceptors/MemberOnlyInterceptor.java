@@ -17,18 +17,19 @@ public class MemberOnlyInterceptor implements HandlerInterceptor {
         log.info("preHandle()");
 
         HttpSession session = request.getSession();
-        if (session.getAttribute("member") != null) {
-            return true;    // 컨트롤러 빈 메서드 실행
+        if (session.getAttribute("member") != null) { // 로그인 상태인 경우
+            return true; // 컨트롤러 빈 메서드 실행
         }
 
-        response.sendRedirect(request.getContextPath() + "/member/login")   ;
+        response.sendRedirect(request.getContextPath() + "/member/login");
 
-        return false;   // 미 로그인 상태
+        return false; // 미로그인 상태
     }
 
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
-        modelAndView.addObject("message", "postHandle!"); //공유 속성값
+        modelAndView.addObject("message", "postHandle!");
+
         log.info("postHandle()");
     }
 

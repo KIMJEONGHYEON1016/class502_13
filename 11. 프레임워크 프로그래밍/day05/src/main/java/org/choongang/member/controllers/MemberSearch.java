@@ -7,12 +7,9 @@ import java.time.LocalDate;
 
 @Data
 public class MemberSearch {
-    @DateTimeFormat(pattern = "yyyyMMdd")
-    private LocalDate sDate;    // 검색 시작일
+    @DateTimeFormat(pattern="yyyyMMdd")
+    private LocalDate sDate; // 검색 시작일
 
     @DateTimeFormat(pattern="yyyyMMdd")
-    private LocalDate eDate;    // 검색 종료일
-
+    private LocalDate eDate; // 검색 종료일
 }
-
-

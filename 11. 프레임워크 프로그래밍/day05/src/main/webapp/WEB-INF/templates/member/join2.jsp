@@ -38,7 +38,7 @@
             <spring:message code="비밀번호_확인" />
         </dt>
         <dd>
-            <form:password path="confirmPassword" />
+           <form:password path="confirmPassword" />
         </dd>
     </dl>
     <dl>

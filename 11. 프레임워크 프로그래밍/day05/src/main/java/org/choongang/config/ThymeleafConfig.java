@@ -23,7 +23,7 @@ public class ThymeleafConfig implements WebMvcConfigurer {
         templateResolver.setApplicationContext(applicationContext);
         templateResolver.setPrefix("/WEB-INF/templates2/");
         templateResolver.setSuffix(".html");
-        templateResolver.setCacheable(false);
+        templateResolver.setCacheable(false); // 캐시
         return templateResolver;
     }
 

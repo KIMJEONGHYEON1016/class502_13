@@ -1,12 +1,9 @@
 package org.choongang.member.controllers;
 
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.choongang.global.exceptions.BadRequestException;
 import org.choongang.member.entities.Member;
 import org.choongang.member.services.JoinService;
 import org.choongang.member.services.LoginService;
@@ -58,7 +55,7 @@ public class MemberController {
 
     @GetMapping("/login")
     public String login(@ModelAttribute RequestLogin form,
-                        @CookieValue(name="savedEmail", required = false) String savedEmail/*,
+                        @CookieValue(name="savedEmail", required=false) String savedEmail/*,
                         @SessionAttribute(name="member", required = false) Member member */) {
         /*
         if (member != null) {
@@ -97,66 +94,72 @@ public class MemberController {
         return "redirect:/member/login";
     }
 
+    /*
+    @GetMapping("/list")
+    public String list(@Valid @ModelAttribute MemberSearch search, Errors errors) {
 
-//    @GetMapping("/list")
-//    public String list(@Valid @ModelAttribute MemberSearch search, Errors errors) {
-//
-//        log.info(search.toString());
-//
-//        boolean result = false;
-//        if (!result) {
-//            throw new BadRequestException("예외 발생!!!");
-//        }
-//
-//        return "member/list";
-//    }
+        log.info(search.toString());
 
-    @ResponseBody
-    @GetMapping("/info/{id}/{id2}")
-    public void info(@PathVariable("id") String email, @PathVariable("id2") String email2) {
+        boolean result = false;
+        if (!result) {
+            throw new BadRequestException("예외 발생!!!");
+        }
 
-        log.info("email:{}, email2:{}", email, email2);
+
+        return "member/list";
     }
+     */
 
     @GetMapping("/list")
     public String list2(Model model) {
+        /*
+        Member member = Member.builder()
+                .email("user01@test.org")
+                .password("12345678")
+                .userName("<h1>사용자01</h1>")
+                .regDt(LocalDateTime.now())
+                .build();
 
-//        Member member = Member.builder()
-//                .email("user01@test.org")
-//                .password("12345678")
-//                .userName("<h1>사용자01</h1>")
-//                .regDt(LocalDateTime.now())
-//                .build();
-//
-//        model.addAttribute("member", member);
-
+        model.addAttribute("member", member);
+        */
         List<Member> items = IntStream.rangeClosed(1, 10)
                 .mapToObj(i -> Member.builder()
-                        .email("user" + i +"@test.org")
+                        .email("user" + i + "@test.org")
                         .userName("사용자" + i)
                         .regDt(LocalDateTime.now())
                         .build())
-                        .toList();
+                .toList();
 
         model.addAttribute("items", items);
+
+        model.addAttribute("addCss", new String[] {"member/style", "member/list"});
+        model.addAttribute("addScript", List.of("member/common", "member/list"));
 
         return "member/list";
     }
 
+    @ResponseBody
+    @GetMapping({"/info/{id}/{id2}", "/info/{id}"})
+    public void info(@PathVariable("id") String email, @PathVariable(name="id2", required = false) String email2) {
 
-//    @ResponseBody
-//    @GetMapping("/list")
-//    public List<Member> list() {
-//        List<Member> members = IntStream.rangeClosed(1, 10)
-//                .mapToObj(i -> Member.builder()
-//                        .email("user"+ i + "@test.org")
-//                        .password("12345678")
-//                        .regDt(LocalDateTime.now())
-//                        .build())
-//                .toList();
-//        return members;
-//    }
-     /*
+        log.info("email:{}, email2:{}", email, email2);
+    }
+
+    @ResponseBody
+    @GetMapping("/list2")
+    public List<Member> list() {
+        List<Member> members = IntStream.rangeClosed(1, 10)
+                .mapToObj(i -> Member.builder()
+                        .email("user" + i + "@test.org")
+                        .password("12345678")
+                        .userName("사용자" + i)
+                        .regDt(LocalDateTime.now())
+                        .build())
+                .toList();
+
+        return members;
+    }
+    /*
     @ExceptionHandler(Exception.class)
     public String errorHandler(Exception e, HttpServletRequest request, HttpServletResponse response, Model model) {
         e.printStackTrace();
@@ -164,7 +167,6 @@ public class MemberController {
         return "error/common";
     }
     */
-
 
     /*
     @InitBinder

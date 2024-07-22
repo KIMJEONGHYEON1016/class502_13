@@ -13,8 +13,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 import java.util.Locale;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
 @SpringJUnitWebConfig
@@ -33,18 +32,22 @@ public class MemberController2Test {
 
     @Test
     void test1() throws Exception {
-        mockMvc.perform(post("/member/join")
-                        .header("appkey", "1234")
-                        .contentType(MediaType.APPLICATION_JSON_VALUE)
-                 )
+        mockMvc.perform(
+                    post("/member/join")
+                            .header("appKey", "1234") // 요청 헤더
+                            .contentType(MediaType.APPLICATION_JSON_VALUE)
+                )
                 .andDo(print());
     }
 
     @Test
-    void test2() throws Exception{
-        mockMvc.perform(get("/member/join")
-                        .header("Accept-Language", Locale.KOREAN.getLanguage())
+    void test2() throws Exception {
+        mockMvc.perform(
+                    get("/member/join")
+                            .header("Accept-Language", Locale.KOREAN.getLanguage())
+
                 )
                 .andDo(print());
     }
+
 }

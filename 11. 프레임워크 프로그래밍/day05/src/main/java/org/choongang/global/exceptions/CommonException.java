@@ -22,6 +22,4 @@ public class CommonException extends RuntimeException {
         super(message);
         this.status = status;
     }
-
-
 }

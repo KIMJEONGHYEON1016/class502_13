@@ -34,11 +34,12 @@ public class MemberRepositoryTest {
         Member member = Member.builder()
                 .seq(1L)
                 .email("user01@test.org")
-                .password("123456789")
+                .password("12345678")
                 .userName("사용자06(수정)")
                 .build();
 
         repository.save(member);
+
     }
 
     @Test
@@ -59,7 +60,7 @@ public class MemberRepositoryTest {
     void test5() {
         Pageable pageable = PageRequest.of(0, 10);
         Page<Member> members = repository.findByUserNameContaining("용자", pageable);
-        members.forEach(System.out::println);
+        //members.forEach(System.out::println);
     }
 
     @Test
@@ -76,21 +77,19 @@ public class MemberRepositoryTest {
 
     @Test
     void test8() {
+
+        //Pageable pageable = PageRequest.of(0, 3);
         Pageable pageable = PageRequest.of(0, 3, Sort.by(desc("regDt"), asc("email")));
         Page<Member> data = repository.findByUserNameContaining("용자", pageable);
 
         List<Member> members = data.getContent();
 
-        long total = data.getTotalElements();   // 조회된 전체 레코드 갯수
-        int pages = data. getTotalPages();
+        long total = data.getTotalElements(); // 조회된 전체 레코드 갯수
+        int pages = data.getTotalPages();
 
         members.forEach(System.out::println);
 
         System.out.printf("총 갯수 : %d, 총 페이지 수 : %d%n", total, pages);
-    }
 
-    @Test
-    void test9() {
-        System.out.println(repository.getClass());
     }
 }

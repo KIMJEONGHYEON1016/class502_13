@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 
 @Component
 @RequiredArgsConstructor
-public class Utils {    // 빈의 이름 - utils
+public class Utils { // 빈의 이름 - utils
 
     private final MessageSource messageSource;
     private final HttpServletRequest request;
@@ -26,13 +26,15 @@ public class Utils {    // 빈의 이름 - utils
 
     public Map<String, List<String>> getErrorMessages(Errors errors) {
         // FieldErrors
+
+
         Map<String, List<String>> messages = errors.getFieldErrors()
                 .stream()
                 .collect(Collectors.toMap(FieldError::getField, e -> getCodeMessages(e.getCodes())));
 
         // GlobalErrors
         List<String> gMessages = errors.getGlobalErrors()
-                .stream()
+                                    .stream()
                 .flatMap(e -> getCodeMessages(e.getCodes()).stream()).toList();
 
         if (!gMessages.isEmpty()) {

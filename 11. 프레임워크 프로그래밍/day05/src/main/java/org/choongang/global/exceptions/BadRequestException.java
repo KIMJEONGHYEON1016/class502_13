@@ -1,7 +1,6 @@
 package org.choongang.global.exceptions;
 
 import org.springframework.http.HttpStatus;
-import org.springframework.validation.Errors;
 
 import java.util.List;
 import java.util.Map;
