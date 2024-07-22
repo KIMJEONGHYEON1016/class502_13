@@ -22,8 +22,6 @@ public class Utils {
 
     public Map<String, List<String>> getErrorMessages(Errors errors) {
         // FieldErrors
-
-
         Map<String, List<String>> messages = errors.getFieldErrors()
                 .stream()
                 .collect(Collectors.toMap(FieldError::getField, e -> getCodeMessages(e.getCodes())));
