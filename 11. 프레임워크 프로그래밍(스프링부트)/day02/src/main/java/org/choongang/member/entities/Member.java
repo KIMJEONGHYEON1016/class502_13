@@ -2,10 +2,8 @@ package org.choongang.member.entities;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
-
-import java.time.LocalDateTime;
+import org.choongang.global.entities.BaseEntity;
+import org.choongang.member.constants.Authority;
 
 @Data
 @Entity
@@ -16,19 +14,25 @@ import java.time.LocalDateTime;
         @Index(name="uq_email_password", columnList = "email, password", unique = true)
 })
  */
-public class Member {
-    @Id @GeneratedValue
+public class Member extends BaseEntity {
+    @Id @GeneratedValue // 자동 증감
     private Long seq;
+
+    @Column(length=60 ,nullable = false, unique = true)
     private String email;
+
+    @Column(length=65 ,nullable = false)
     private String password;
+
+//    @Column(name="name")  // 실제 DB에 저장되어 있는 필드명
+    @Column(length=40, nullable = false)
     private String userName;
 
-    @Lob
+    // @Lob
+    @Transient
     private String introduction;
 
-    @CreationTimestamp
-    private LocalDateTime createdAt;
-
-    @UpdateTimestamp
-    private LocalDateTime modifiedAt;
+    @Column(length=10)
+    @Enumerated(EnumType.STRING)
+    private Authority authority;
 }
