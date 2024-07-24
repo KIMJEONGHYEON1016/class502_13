@@ -1,12 +1,17 @@
 package org.choongang.member.entities;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.choongang.global.entities.BaseEntity;
 import org.choongang.member.constants.Authority;
 
+@Builder
 @Data
 @Entity
+@NoArgsConstructor @AllArgsConstructor
 //@Table(name="CH_MEMBER")
 /*
 @Table(indexes = {
