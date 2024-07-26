@@ -45,6 +45,7 @@ public class Member extends BaseEntity {
     @JoinColumn(name="profile_seq")
     private MemberProfile profile;
 
+
     @ToString.Exclude
     @OneToMany(mappedBy = "member")
     private List<BoardData> items;
