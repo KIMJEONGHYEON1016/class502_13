@@ -5,6 +5,7 @@ import lombok.*;
 import org.choongang.board.entities.BoardData;
 import org.choongang.global.entities.BaseEntity;
 import org.choongang.member.constants.Authority;
+import org.hibernate.annotations.BatchSize;
 
 import java.util.List;
 
@@ -45,8 +46,8 @@ public class Member extends BaseEntity {
     @JoinColumn(name="profile_seq")
     private MemberProfile profile;
 
-
+    @BatchSize(size=3)
     @ToString.Exclude
-    @OneToMany(mappedBy = "member")
+    @OneToMany(mappedBy = "member", cascade = {CascadeType.REMOVE, CascadeType.PERSIST}, orphanRemoval = true)  // 제약 조건 CASCADE 아님
     private List<BoardData> items;
 }
