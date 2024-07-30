@@ -11,7 +11,7 @@
                     <th th:text="#{게시글_제목}"></th>
                 </tr>
                 <div>
-                    <a th:href="@{/board/write}" th:text="#{글쓰기}"></a>
+                    <a th:href="@{/board/post}" th:text="#{글쓰기}"></a>
                 </div>
             </thead>
             <tbody>
@@ -19,7 +19,7 @@
                     <td th:text="${data.seq}"></td>
                     <td th:text="${data.createdAt}"></td>
                     <td>
-                        <a th:href="@{/board/post/{seq}(seq=${post.seq})}" th:text="${post.title}"></a>
+                        <a th:href="@{/board/data/{seq}(seq=${data.seq})}" th:text="${data.title}"></a>
                     </td>
                 </tr>
             </tbody>
