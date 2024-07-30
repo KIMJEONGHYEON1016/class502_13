@@ -6,6 +6,8 @@ import lombok.Data;
 
 @Data
 public class RequestBoardData {
+    private Long seq;
+
     @NotBlank @Size(min = 2, max = 15)
     private String title;
 

@@ -9,6 +9,7 @@
                 <tr>
                     <th th:text="#{게시글_번호}"></th>
                     <th th:text="#{게시글_제목}"></th>
+                    <th th:text="#{작성된 시간}"></th>
                 </tr>
                 <div>
                     <a th:href="@{/board/post}" th:text="#{글쓰기}"></a>
@@ -17,10 +18,10 @@
             <tbody>
                 <tr th:each="data : ${datas}">
                     <td th:text="${data.seq}"></td>
-                    <td th:text="${data.createdAt}"></td>
                     <td>
-                        <a th:href="@{/board/data/{seq}(seq=${data.seq})}" th:text="${data.title}"></a>
+                        <a th:href="@{/board/content/{seq}(seq=${data.seq})}" th:text="${data.title}"></a>
                     </td>
+                    <td th:text="${data.createdAt}"></td>
                 </tr>
             </tbody>
         </table>

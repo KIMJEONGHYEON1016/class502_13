@@ -1,7 +1,9 @@
 package org.zzzang.board.services;
 
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+import org.zzzang.board.controllers.RequestBoardData;
 import org.zzzang.board.entities.BoardData;
 import org.zzzang.board.repositories.BoardRepository;
 
@@ -18,6 +20,17 @@ public class BoardInfoService {
     }
 
     public BoardData get(Long seq) {
-        return boardRepository.findById(seq).orElse(null);
+        BoardData data = boardRepository.findById(seq).orElse(null);
+
+        return data;
+    }
+
+    public RequestBoardData getForm(Long seq) {
+        BoardData bData = get(seq);
+        RequestBoardData data = new ModelMapper().map(bData, RequestBoardData.class);
+
+        // 2차 가공
+
+        return data;
     }
 }
