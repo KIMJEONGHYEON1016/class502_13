@@ -8,12 +8,13 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.zzzang.global.entities.BaseEntity;
 
 @Data
 @Entity
 @Builder
 @NoArgsConstructor @AllArgsConstructor
-public class BoardData {
+public class BoardData extends BaseEntity {
     @Id @GeneratedValue
     private Long seq;
 

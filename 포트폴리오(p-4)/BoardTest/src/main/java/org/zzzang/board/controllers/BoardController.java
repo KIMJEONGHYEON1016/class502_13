@@ -3,19 +3,27 @@ package org.zzzang.board.controllers;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.zzzang.board.entities.BoardData;
+import org.zzzang.board.services.BoardInfoService;
+import org.zzzang.board.services.BoardSaveService;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/board")
 @RequiredArgsConstructor
 public class BoardController {
+    private final BoardInfoService boardInfoService;
+    private final BoardSaveService boardSaveService;
 
     @GetMapping("/list")
-    public String list() {
+    public String list(Model model) {
+        List<BoardData> datas = boardInfoService.getList();
+        model.addAttribute("datas", datas);
+
         return "front/board/list";
     }
 
@@ -23,20 +31,11 @@ public class BoardController {
     @GetMapping("/post")
     public String post(@ModelAttribute RequestBoardData data) {
 
-        return "front/board/post";
-
-    }
-
-    @PostMapping("/post")
-    public String postPs(@Valid RequestBoardData data, Errors errors) {
-
-        if (errors.hasErrors()) {
-            return "front/board/post";
-        }
 
         return "front/board/post";
 
     }
+
 
     @GetMapping("/update")
     public String update() {
@@ -44,8 +43,18 @@ public class BoardController {
     }
 
 
-    @GetMapping("/write")
-    public String write() {
-        return "front/board/write";
+    @GetMapping("/content/{seq}")
+    public String write(@PathVariable("seq") Long seq, Model model) {
+        BoardData data = boardInfoService.get(seq);
+        model.addAttribute("data", data);
+
+        return "front/board/content";
+    }
+
+    @PostMapping("/save")
+    public String save(@Valid RequestBoardData data, Errors errors) {
+        boardSaveService.save(data);
+
+        return "redirect:/board/list";
     }
 }

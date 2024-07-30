@@ -6,21 +6,22 @@
         <h1 th:text="#{게시글_목록}"></h1>
         <table>
             <thead>
-            <tr>
-                <th th:text="#{게시글_번호}"></th>
-                <th>제목</th>
-            </tr>
-            <div>
-                <a th:text="#{글_쓰기}" th:href="@{/board/write}"></a>
-            </div>
+                <tr>
+                    <th th:text="#{게시글_번호}"></th>
+                    <th th:text="#{게시글_제목}"></th>
+                </tr>
+                <div>
+                    <a th:href="@{/board/write}" th:text="#{글쓰기}"></a>
+                </div>
             </thead>
             <tbody>
-            <tr th:each="post : ${posts}">
-                <td th:text="${post.id}"></td>
-                <td>
-                    <a th:href="@{/board/post/{id}(id=${post.id})}" th:text="${post.title}"></a>
-                </td>
-            </tr>
+                <tr th:each="data : ${datas}">
+                    <td th:text="${data.seq}"></td>
+                    <td th:text="${data.createdAt}"></td>
+                    <td>
+                        <a th:href="@{/board/post/{seq}(seq=${post.seq})}" th:text="${post.title}"></a>
+                    </td>
+                </tr>
             </tbody>
         </table>
     </main>

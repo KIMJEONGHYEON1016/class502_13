@@ -3,8 +3,8 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{front/layouts/main}">
     <main layout:fragment="content">
-        <h1 th:text="#{포스트}"></h1>
-        <form name="frmRegist" method="POST" th:action="@{/board/post}" autocomplete="off" th:object="${requestBoardData}">
+        <h1 th:text="#{글쓰기}"></h1>
+        <form name="frmRegist" method="POST" th:action="@{/board/save}" autocomplete="off" th:object="${requestBoardData}">
             <div class="error global" th:each="err : ${#fields.globalErrors()}" th:text="${err}"></div>
 
             <dl>
