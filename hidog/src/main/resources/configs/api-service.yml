@@ -35,3 +35,13 @@ logging:
   level:
     org.hibernate.type: trace
     org.hibernate.orm.jdbc.bind: trace
+
+  # 유레카 설정
+eureka:
+  instance:
+    preferIpAddress: true   # 아이피 먼저 체크
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: ${eurekaHost}/eureka/
