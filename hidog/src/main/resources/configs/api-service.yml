@@ -4,10 +4,10 @@ server:
 spring:
   # 데이터베이스 설정
   datasource:
-#    driverClassName: oracle.jdbc.driver.OracleDriver
-    driverClassName: '{cipher}536165156156165165656'
-#    url: jdbc:oracle:thin:@${db.host}:${db.port}:XE
-    url: '{cipher}536165156156165165656'
+    driverClassName: oracle.jdbc.driver.OracleDriver
+#    driverClassName: '{cipher}536165156156165165656'
+    url: jdbc:oracle:thin:@${db.host}:${db.port}:XE
+#    url: '{cipher}536165156156165165656'
     username: ${db.username}
     password: ${db.password}
 
