@@ -1,13 +1,13 @@
 server:
-  port: 3001
+  port: 3002
 
 spring:
   # 데이터베이스 설정
   datasource:
     driverClassName: oracle.jdbc.driver.OracleDriver
-#    driverClassName: '{cipher}536165156156165165656'
+    #    driverClassName: '{cipher}536165156156165165656'
     url: jdbc:oracle:thin:@${db.host}:${db.port}:XE
-#    url: '{cipher}536165156156165165656'
+    #    url: '{cipher}536165156156165165656'
     username: ${db.username}
     password: ${db.password}
 
@@ -19,8 +19,7 @@ spring:
         format_sql: true
         use_sql_comments: true
     hibernate:
-      ddlAuto: update
-
+      ddlAuto: create
 
   # 파일 업로드 용량 설정
   servlet:
@@ -29,6 +28,15 @@ spring:
       maxRequestSize: 60MB
       fileSizeThreshold: 30MB
 
+  # 정적 자원 설정(CSS, JS, 이미지)
+  web:
+    resources:
+      staticLocations: classpath:/static/
+
+  # 타임리프 설정
+  thymeleaf:
+    cache: true
+    prefix: classpath:/templates/
 
 # 로거 설정
 logging:
@@ -36,10 +44,16 @@ logging:
     org.hibernate.type: trace
     org.hibernate.orm.jdbc.bind: trace
 
-  # 유레카 설정
+# 파일 업로드 경로 설정
+file:
+  upload:
+    path: ${file.path}
+    url: /upload/
+
+# 유레카 설정
 eureka:
   instance:
-    preferIpAddress: true   # 아이피 먼저 체크
+    preferIpAddress: true
   client:
     registerWithEureka: true
     fetchRegistry: true
@@ -56,4 +70,4 @@ management:
   endpoints:
     web:
       exposure:
-        include: health, refresh #더 자세히 보임, 서버를 껐다키지않아도 갱신
+        include: health, refresh
