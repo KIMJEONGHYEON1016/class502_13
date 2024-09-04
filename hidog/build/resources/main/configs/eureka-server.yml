@@ -1,0 +1,15 @@
+server:
+  port: 3101
+
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    registerWithEureka: false # 찾을 필요 없음
+    fetchRegistry: false
+    serviceUrl:
+      defaultZone:
+      - http://${eureka.instance.hostname}:${server.port}/eureka/
+
+  server:
+    waitTimeInMsWhenSyncEmpty: 30000   #30초에 한 번씩 인스턴스 검색
