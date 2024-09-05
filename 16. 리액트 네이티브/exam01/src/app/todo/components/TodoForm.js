@@ -1,30 +1,32 @@
 import React from 'react';
-import { IoIosRadioButtonOn, IoIosRadioButtonOff } from 'react-icons/io';
+import { IoIosRadioButtonOn, IoIosRadioButtonOff, IoMdRadioButtonOn, IoMdRadioButtonOff } from 'react-icons/io';
 
-const TodoForm = ({ onSubmit }) => {
+const TodoForm = ({ onSubmit, onChange, form }) => {
   return (
     <form autoComplete="off" onSubmit={onSubmit}>
       <dl>
         <dt>할 일</dt>
         <dd>
-          <input type="text" onChange={onchange}/>
+          <input type="text" name="title" value={form?.title ?? ''} onChange={onChange} />
         </dd>
       </dl>
       <dl>
         <dt>내용</dt>
         <dd>
-          <textarea></textarea>
+          <textarea name="content" value={form?.content ?? ''} onChange={onChange}></textarea>
         </dd>
       </dl>
       <dl>
         <dt>완료 여부</dt>
         <dd>
           <span>
-            <IoIosRadioButtonOff />
+            {form?.done ? <IoMdRadioButtonOn /> :
+            <IoIosRadioButtonOff />}
             완료
           </span>
           <span>
-            <IoIosRadioButtonOff />
+          {form?.done ? <IoMdRadioButtonOff /> :
+            <IoIosRadioButtonOn />}
             미완료
           </span>
         </dd>
